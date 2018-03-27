@@ -88,7 +88,7 @@ class OAuthAuth(BaseAuth):
             raise AuthMissingParameter(self, 'state')
         elif not state:
             raise AuthStateMissing(self, 'state')
-        elif not constant_time_compare(request_state, state):
+        elif not constant_time_compare(request_state.lower(), state.lower()):
             raise AuthStateForbidden(self)
         else:
             return state
